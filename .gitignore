@@ -1,0 +1,23 @@
+# Node dependencies (both frontend & backend)
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+**/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+
+# Build outputs (optional)
+dist/
+build/
+.next/
+
+# Editor
+.vscode/

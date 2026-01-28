@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import userModel from "../models/user.model.js";
+import { error } from "console";
 dotenv.config();
 
 const generatedRefreshToken = async (userId)=>{
@@ -11,8 +12,8 @@ const generatedRefreshToken = async (userId)=>{
    const updateRefereshToken = await userModel.updateOne(
       {_id:userId},
    {refresh_token: token})
-
-
+   
+   return token;
 }
 
 export default generatedRefreshToken

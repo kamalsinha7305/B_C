@@ -1,48 +1,39 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 dotenv.config();
 
-const auth = async (req, res, next) => {
-  try {
-    const authHeader = req.headers.authorization;
+const auth =async(req,res,next)=>{
+    try{
+        const token =req.cookies.accessToken || req?.headers?.authorization.split(" ")[1]
+        console.log("token",token);
+       
+        if(!token){
+            return res.status(401).json({
+                message :"provide"
+            })
+        }
+        const decode = await jwt.verify(token,process.env.SECRET_KEY_ACCESS_TOKEN);
+        console.log("decode",decode);
+        if(!decode){
+            return res.status(401).json({
+                message :"unauthorized access",
+                success : false,
+                error :true
+            })
+        }
+        req.userId = decode.id;
+        
 
-    let token;
-
-    if (req.cookies?.accessToken) {
-      token = req.cookies.accessToken;
-    } else if (authHeader && authHeader.startsWith("Bearer ")) {
-      token = authHeader.split(" ")[1];
+        next();
     }
+    catch(err){
+        return res.status(500).json({
+            message : err.message || err ,
+            error : true ,
+            success :false 
+        })
 
-    if (!token) {
-      return res.status(401).json({
-        message: "Access token required",
-        success: false,
-        error: true
-      });
-    }
-
-    const decode = jwt.verify(token, process.env.SECRET_KEY_ACCESS_TOKEN);
-
-    if (!decode) {
-      return res.status(401).json({
-        message: "Unauthorized access",
-        success: false,
-        error: true
-      });
-    }
-
-    req.userId = decode.id;
-    console.log("decode", decode);
-
-    next();
-  } catch (err) {
-    return res.status(401).json({
-      message: err.message || err,
-      success: false,
-      error: true
-    });
-  }
-};
-
-export default auth;
+     }
+}
+export default auth ;

@@ -30,7 +30,7 @@ const userSchema =new  mongoose.Schema({
           default: "",
 
     },
-     verfiyEmailToken :{ 
+    verfiyEmailToken :{ 
         type : String, 
         default:""  
     },

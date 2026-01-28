@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-
 const userSchema =new  mongoose.Schema({
   
     name :{
@@ -31,7 +30,10 @@ const userSchema =new  mongoose.Schema({
           default: "",
 
     },
-
+     verfiyEmailToken :{ 
+        type : String, 
+        default:""  
+    },
     verfiy_email :{ 
         type : Boolean, 
         default:false  

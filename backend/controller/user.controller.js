@@ -208,3 +208,8 @@ export const logoutController =async(req, res)=>{
         })
     }
 }
+
+export const uploadAvatar =async (req,res) =>{
+    
+    
+}

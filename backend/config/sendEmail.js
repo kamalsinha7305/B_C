@@ -18,7 +18,8 @@ const sendEmail =async({sendTo,subject,html})=>{
     to: sendTo,
     subject: subject,
     html: html,
-  });
+  })
+  
   if (error) {
     return console.error({ error });
   }

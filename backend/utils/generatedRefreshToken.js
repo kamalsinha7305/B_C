@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import userModel from "../models/user.model.js";
 import { error } from "console";
+import {generateOtp} from "../utils/generateOtp.js"
 dotenv.config();
 
 const generatedRefreshToken = async (userId)=>{
@@ -15,5 +16,5 @@ const generatedRefreshToken = async (userId)=>{
    
    return token;
 }
-
+//const otp = generateOtp(); 
 export default generatedRefreshToken

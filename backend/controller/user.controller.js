@@ -11,8 +11,8 @@ import auth from "../middleware/auth.js";
 import uploadImageCloudinary from "../utils/uploadImageCloudinary.js";
 import {generateOtp} from "../utils/generateOtp.js";
 import forgotPaswordTemplate from "../utils/forgotPasswordTemplate.js";
-import { userInfo } from "os";
-import { error } from "console";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const registerUserController = async (req, res) => {
 
@@ -326,9 +326,9 @@ export const forgotPaswordController =async(req,res) =>{
 export const verifyforgotpasswordotp =async(req, res)=>{
     try {
 
-        const {email, otp } = req.body;
+        const { email, otp } = req.body;
 
-        if(!email || otp ){
+        if(!email || !otp ){
             return res.status(400).json({
                 message :"Please provide email and otp",
                 success : false,
@@ -381,7 +381,6 @@ export const verifyforgotpasswordotp =async(req, res)=>{
     }
 }           
 
-//
 export const resetpassword = async(req,res) =>{
 
     try{
@@ -393,11 +392,98 @@ export const resetpassword = async(req,res) =>{
                 error :true 
             })
         }
+
+        const user =await userModel.findOne({email})
+        if(!user){
+            return res.status(400).json({
+                message : "Invalid user Email not present ",
+                error : true,
+                success :false 
+            })
+        }
+
+        if(newPassword !== confirmPassword ){
+            return res.status(400).json({
+                message :"new Password and confirmPassword not same",
+                error : true,
+                success :false 
+
+            })
+        }
+            const hashpassword = await bcrypt.hash(newPassword, 10);
+    
+            const update  = await userModel.findOneAndUpdate(user._id,{
+                password : hashpassword
+            })
+
+            return res.status(200).json({
+
+                message : "password updated ",
+                error : false,
+                success : true 
+
+            })
+
+        
     }
     catch(err){
         return res.status(500).json({
             message : err.message || err,
             success : false,
+            error :true 
+        })
+    }
+}
+
+export const refreshToken = async(req,res)=>{
+    try{
+        const token =req.cookies.refreshToken || req.headers.authorization?.split(" ")[1];
+
+        console.log(token);
+
+
+         if(!token){
+            return res.status(401).json({
+                message : "unauthorized / invalid token",
+                error :true ,
+                success :false 
+
+            })
+         }
+         const verifytoken =await jwt.verify(token,process.env.SECRET_KEY_ACCESS_TOKEN);
+         
+         if(!verifytoken){
+            return res.status(401).json({
+                message : "token expired",
+                error : true,
+                success :false
+            })
+         }
+          const userId = verifytoken?._id;
+          const newaccesstoken = await generatedAccessToken(userId);
+      
+        const cookieoption={
+            httpOnly :true,
+            secure : true ,
+            sameSite :"None"
+         }
+        res.cookie('accessToken',newaccesstoken,cookieoption);
+       
+        return res.status(200).json({
+            message :"New Access Token Generated",
+            success: true ,
+            error: false,
+            data : {
+                newaccesstoken
+            }
+        })
+
+
+    } 
+    catch(err){
+        return res.status(401).json({
+            message : err.message || err ,
+            succces :false,
             error :true 
         })
     }

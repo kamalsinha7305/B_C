@@ -7,9 +7,9 @@ function Footer() {
       <div className='container mx-auto p-4 text-center flex flex-col gap-2'>
       <p> © All Rights Reserved 2026</p>
       <div className='flex items-center justify-center gap-4 text-2xl'>
-        <a href="" className=' hover:text-primary-200'><FaFacebook/></a>
-        <a href="" className=' hover:text-secondary-200'><FaInstagram/></a>
-        <a href="" className=' hover:text-primary-100'><FaLinkedin/></a>
+        <a href="" className='hover:text-primary-100'><FaFacebook/></a>
+        <a href="" className='hover:text-secondary-200'><FaInstagram/></a>
+        <a href="" className='hover:text-mint-500'><FaLinkedin/></a>
       </div>
       </div>
 

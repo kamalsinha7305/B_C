@@ -1,15 +1,20 @@
 import { useState } from 'react'
 
 import './App.css'
+import { Outlet } from 'react-router-dom'
+import Header  from './components/Header'
+import Footer from './components/Footer';
+
 
 function App() {
   return (
-    <>
-     
-      <p className="text-red-500">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+  <>
+    <Header/>
+ <main>
+  <Outlet/>
+ </main>
+    <Footer/>
+ </>
   )
 }
 

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+@theme{
   --color-primary-200: rgb(255 11 0);
   --color-primary-100: rgb(255 201 41);   
 

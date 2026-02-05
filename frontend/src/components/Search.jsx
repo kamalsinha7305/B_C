@@ -8,22 +8,16 @@ import useMobile from '../hooks/useMobile';
 function Search() {
   const navigateTo = useNavigate();
   const location = useLocation();
-
   const [isSearchPage, setIsSearchPage] = useState(false);
   const [isMobile] = useMobile();
-
-  
   useEffect(() => {
     const isSeacrh = location.pathname === '/search'
     setIsSearchPage(isSeacrh)
   },[location.pathname]); 
 
-
   const redirectToSearchPage = () => {
     navigateTo('/search')
   }
-
-  console.log("search",isSearchPage);
  
   return (
     <div className='  min-w-65 lg:min-w-100 h-9 lg:h-10 rounded border bg-slate-50 flex items-center  overflow-hidden cursor-pointer  group focus-within:border-primary-100'>
@@ -34,8 +28,7 @@ function Search() {
             <IoMdArrowBack size={22} />
           </button>
       </Link>
-      ): (
-        
+      ): (        
       <div>
           <button className='flex justify-center items-center h-full p-3 text-neutral-600 group-focus-within:text-primary-100 ' >
             <CiSearch size={22} />
@@ -43,8 +36,6 @@ function Search() {
       </div>
       )
       }
-     
-
       <div className=" w-full h-full flex  items-center ">
         {
         (!isSearchPage)?(

@@ -11,12 +11,8 @@ function Header() {
 
   const [isMobile] = useMobile();
   const location = useLocation();
-
-
   const isSearchPage = location.pathname == '/search';
-
-
-
+  
   return (
     <header className='h-15 lg:h-18 lg:shadow-md sticky top-0 '>
       {

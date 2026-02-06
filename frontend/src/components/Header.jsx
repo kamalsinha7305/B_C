@@ -5,13 +5,17 @@ import { Link } from 'react-router-dom'
 import { FaUserAstronaut } from "react-icons/fa";
 import { CiShoppingCart } from "react-icons/ci";
 import useMobile from '../hooks/useMobile';
-import { useLocation } from 'react-router-dom'
+import { useLocation,useNavigate } from 'react-router-dom'
 
 function Header() {
-
+  const navigateTo =useNavigate();
   const [isMobile] = useMobile();
   const location = useLocation();
   const isSearchPage = location.pathname == '/search';
+  const redirecttologin =() =>{
+    navigateTo('/login');
+    
+  }
   
   return (
     <header className='h-15 lg:h-18 lg:shadow-md sticky top-0 '>
@@ -38,16 +42,16 @@ function Header() {
               {/*  for destop versio login */}
 
               <div className='hidden lg:flex items-center gap-8 '>
-                <Link to={"/login"}> Login </Link>
-                <button className='flex  items-center gap-2 bg-secondary-200 px-2 py-1 rounded text-white'>
+                <button onClick={redirecttologin} className='text-lg text-bold cursor-pointer px-2'> Login </button>
+                <button className='flex  items-center gap-2 bg-green-800 px-3 hover:bg-green-700 py-3 rounded text-white'>
                   {/* add to cart icon  */}
 
-                  <div>
-                    <CiShoppingCart size={28} />
+                  <div className="animate-bounce">
+                    <CiShoppingCart size={27} />
                   </div>
-                  <div>
-                    <p> 1 items </p>
-                    <p> total price </p>
+                  <div className='font-semibold'>
+                    <p> My cart </p>
+                    
                   </div>
 
                 </button>

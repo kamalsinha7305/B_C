@@ -5,7 +5,8 @@ function Register() {
     const [data, setdata] = useState({
         name: "",
         email: "",
-        password: ""
+        password: "",
+        confirmPassword: ""
     })
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,6 +52,19 @@ function Register() {
                         />
                     </div>
 
+
+                    <div className='grid'>
+                        <label htmlFor="password">Password</label>
+                        <input
+                            id="password"
+                            type="password"
+                            autoFocus
+                            name='password'
+                            className='border rounded p-2 bg-blue-50'
+                            value={data.password}
+                            onChange={handleChange}
+                        />
+                    </div>
 
                 </form>
             </div>

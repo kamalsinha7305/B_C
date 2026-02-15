@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from "react";
 import { FaEyeSlash ,FaEye} from "react-icons/fa";
+import toast from 'react-hot-toast';
 
 function Register() {
     const [data, setdata] = useState({
@@ -23,7 +24,13 @@ function Register() {
         })
     }
     const handlesubmit = (e)=>{
-        e.preventDefault();
+        e.preventDefault() 
+        if(data.password !== data.confirmPassword){
+            toast.error(
+            "password and confirm password should be same"
+            )
+        }
+        const response =await  
     }
     const valideValue = Object.values(data).every(el => el)
     return (
@@ -121,7 +128,7 @@ function Register() {
                         
                     </div>
 
-                   <button className={` ${ valideValue ?"bg-green-600" : "bg-gray-400"} text-white py-2 rounded font-semibold my-3 tracking-wide transition-all duration-300 hover:scale-105 `}>Register User</button>
+                   <button disabled={!valideValue} className={` ${ valideValue ?"bg-green-600" : "bg-gray-400"} text-white py-2 rounded font-semibold my-3 tracking-wide transition-all duration-300 hover:scale-105 `}>Register User</button>
 
                 </form>
             </div>

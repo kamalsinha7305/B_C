@@ -22,13 +22,17 @@ function Register() {
             }
         })
     }
+    const handlesubmit = (e)=>{
+        e.preventDefault();
+    }
+    const valideValue = Object.values(data).every(el => el)
     return (
         <section className='bg-white w-full container mx-auto px-2'>
-            <div className=" bg-white my-4 max-w-lg mx-auto rounded p-4">
+            <div className=" bg-white my-4 max-w-lg mx-auto rounded p-7">
                 <h2>
                     Welcome to Blinkyit
                 </h2>
-                <form className="grid gap-4 mt-4">
+                <form className="grid gap-4 mt-4" onSubmit={handlesubmit}>
                     <div className='grid'>
                         <label htmlFor="name">Name :</label>
                         <input
@@ -56,7 +60,6 @@ function Register() {
                             placeholder='Enter Your Email'
                         />
                     </div>
-
 
                     <div className='grid'>
                         <label htmlFor="password">Password :</label>
@@ -88,8 +91,6 @@ function Register() {
                         
                     </div>
 
-
-
                      <div className='grid'>
                         <label htmlFor="confirmPassword">Confirm Password :</label>
                         <div className="border rounded p-2 bg-blue-50 flex items-center focus-within:border-primary-200">
@@ -120,7 +121,7 @@ function Register() {
                         
                     </div>
 
-                   <button className='bg-green-500 text-white py-2 rounded font-semibold my-3 tracking-wide transition-all duration-300 hover:scale-105 '>Register User</button>
+                   <button className={` ${ valideValue ?"bg-green-600" : "bg-gray-400"} text-white py-2 rounded font-semibold my-3 tracking-wide transition-all duration-300 hover:scale-105 `}>Register User</button>
 
                 </form>
             </div>

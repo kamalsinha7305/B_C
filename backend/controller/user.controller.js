@@ -15,7 +15,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const registerUserController = async (req, res) => {
-
+    
     try {
         const { name, email, password } = req.body;
        console.log(name,email, password);

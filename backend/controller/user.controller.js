@@ -18,8 +18,6 @@ export const registerUserController = async (req, res) => {
     
     try {
         const { name, email, password } = req.body;
-       console.log(name,email, password);
-
         if (!name || !email || !password) {
             return res.status(400).json({
                 message: "Provide name , email and password ",

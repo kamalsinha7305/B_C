@@ -2,8 +2,10 @@ import React from 'react';
 import { useState } from "react";
 import { FaEyeSlash ,FaEye} from "react-icons/fa";
 import toast from 'react-hot-toast';
-import axios, { Axios } from 'axios'
+import axios  from 'axios'
 import SummaryApi from '../common/SummaryApi';
+import Axios from '../utils/Axios'
+import AxiosToastError from '../utils/AxiosToastError';
 function Register() {
     const [data, setdata] = useState({
         name: "",
@@ -30,10 +32,26 @@ function Register() {
             toast.error(
             "password and confirm password should be same"
             )
+            return;
+
         }
-        const response =await Axios({
-            ...SummaryApi.register            
+
+        try{
+             const response =await Axios({
+            ...SummaryApi.register,
+               data: data             
         })
+        if(response.data.error){
+            toast.error(response.data.message)
+        }
+        if(response.data.success){
+            toast.error(response.data.message)
+        }
+
+        }catch(error){
+            AxiosToastError(error);
+        }
+       
     }
     const valideValue = Object.values(data).every(el => el)
     return (

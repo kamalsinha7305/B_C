@@ -4,6 +4,10 @@ export const baseURL = "http://localhost:8000" ;
     register :{
         url: '/api/user/register',
         method : 'post'
+    },
+    login: {
+        url :'api/user/login',
+        method:  'post'
     }
 } 
 

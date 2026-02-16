@@ -6,6 +6,7 @@ import axios  from 'axios'
 import SummaryApi from '../common/SummaryApi';
 import Axios from '../utils/Axios'
 import AxiosToastError from '../utils/AxiosToastError';
+import {useNavigate, Link} from "react-router-dom"
 function Register() {
     const [data, setdata] = useState({
         name: "",
@@ -15,6 +16,8 @@ function Register() {
     })
     const [showpassword,setshowpasword] = useState(false);
     const [showconfirmPassword,setshowconfirmPassword] = useState(false);
+    const navigate =useNavigate();
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -45,7 +48,14 @@ function Register() {
             toast.error(response.data.message)
         }
         if(response.data.success){
-            toast.error(response.data.message)
+            toast.success(response.data.message)
+            setdata({
+                name: "",
+                email: "",
+                password: "",
+                confirmPassword: ""
+            })
+            navigate('/login');
         }
 
         }catch(error){
@@ -152,6 +162,10 @@ function Register() {
                    <button disabled={!valideValue} className={` ${ valideValue ?"bg-green-600" : "bg-gray-400"} text-white py-2 rounded font-semibold my-3 tracking-wide transition-all duration-300 hover:scale-105 `}>Register User</button>
 
                 </form>
+
+                <p>
+                    Already have a account ?<Link to={"/register"}>Login</Link>
+                </p>
             </div>
         </section>
     )

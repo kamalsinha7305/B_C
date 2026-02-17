@@ -164,7 +164,7 @@ function Register() {
                 </form>
 
                 <p>
-                    Already have a account ?<Link to={"/register"}>Login</Link>
+                    Already have a account ?<Link to={"/login"}>Login</Link>
                 </p>
             </div>
         </section>

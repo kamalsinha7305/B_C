@@ -62,6 +62,4 @@ function OtpVerification() {
         </section>
     )
 }
-
-
 export default OtpVerification
